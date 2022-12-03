@@ -1,0 +1,14 @@
+insert into anneeencours values ('ANN0000','2020-2021');
+insert into choixtarif values ('CHX1','Preschool no food');
+insert into choixtarif values ('CHX2','Preschool with food');
+insert into choixtarif values ('CHX3','primary');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Once off Registration fee',850,'ECO000001');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Preschool no food',2500,'ECO000001');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Preschool with food',2750,'ECO000001');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Primary',3000,'ECO000001');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Stationary and toiletries',800,'ECO000001');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Once off Registration fee',700,'ECO000002');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Preschool no food',2300,'ECO000002');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Preschool with food',2500,'ECO000002');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Primary',2700,'ECO000002');
+insert into tarif VALUES('TRF'|| seq_tarif.nextval,'Stationary and toiletries',800,'ECO000002');

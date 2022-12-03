@@ -1,0 +1,17 @@
+[PropertyInfo]
+attributIDName,String,false,false, , ,true,<default>
+credit,double,false,false,montantCredit,montantCredit,true,<default>
+daty,java.sql.Date,false,false,daty,daty,true,<default>
+debit,double,false,false,montantDebit,montantDebit,true,<default>
+descCaisse,String,false,false,descCaisse,descCaisse,true,<default>
+entite,String,false,false,benCaisse,benCaisse,true,<default>
+idCaisse,String,false,false,caisse,caisse,true,<default>
+reste,double,false,false,montantReste,montantReste,true,<default>
+tuppleID,String,false,false, , ,true,<default>
+repEntree,double,false,false,repEntree,repEntree,true,<default>
+repDepense,double,false,false,repDepense,repDepense,true,<default>
+[IconNames]
+
+
+
+

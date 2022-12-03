@@ -1,0 +1,78 @@
+
+<script language="javascript">
+function page(page_dest){
+        document.location=page_dest;
+}
+function decision(message, url){
+if(confirm(message)) location.href = url;
+}
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>Emprunt </h1>
+<h2>Verification</h2>
+<form name="form2" method="post" action="">
+<table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+	<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+        <tr>
+          <td width="144" height="23" valign="top" class="left">Date :</td>
+          <td width="254" valign="top">&nbsp; 12/01/2008</td>
+        </tr><tr>
+          <td  height="23" valign="top" class="left">Magasin : </td>
+          <td valign="top">&nbsp;Magasin 01 </td>
+        </tr>
+        <tr>
+          <td  height="23" valign="top" class="left">Reste</td>
+          <td valign="top">&nbsp;12Tonnes</td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Contoleur</td>
+          <td valign="top"> &nbsp;Contoleur1</td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Remarque</td>
+          <td valign="top"> &nbsp;Controle effectué par le controleur 1 </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+ <div align="center">
+    
+      <input type="hidden" value="finalise" name="acte">
+
+    <p>
+      <input name="button" type="button" class="submit" onclick="page('dossier_mouvement.html')" value="Ajouter detail" />
+    </p>
+  </div>
+
+<h2>Tiers</h2>
+
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr><td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+
+  <tr class="head">
+    <td  height="20">&nbsp;Num Bobine</td>
+          <td>&nbsp; Pourcentage reste </td>
+          
+          <td align="center" valign="middle">&nbsp;</td>
+      </tr>
+	
+     <tr>
+          <td  height="20">BOB001</td>
+          <td>15%</td>
+          <td align="center" valign="middle">
+	
+<img src="../../application/05-08-08/affichage/facture/images/button_drop.png" width="11" height="13" border="0" alt="Supprimer"></td>
+        </tr>
+       <tr>
+          <td  height="20">BOB002</td>
+          <td>25%</td>
+          <td align="center" valign="middle">
+	
+<img src="../../application/05-08-08/affichage/facture/images/button_drop.png" width="11" height="13" border="0" alt="Supprimer"></td>
+        </tr>
+	  </table>
+		</td></tr></table>
+</form>

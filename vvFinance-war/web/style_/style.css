@@ -1,0 +1,226 @@
+.modele{
+	font-size: 19px;
+	color: #FF6600;
+	text-align: center;
+	font-weight: normal;
+
+
+}
+.monographe {
+	border: thin solid #D345FF;
+}
+.formadd{
+	font-family:  Verdana,Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #555555;
+	font-weight:bold;
+
+}
+.ajouttitre {
+	font-family:  Verdana,Arial, Helvetica, sans-serif;
+	font-size: 31px;
+	color: #bbbbbb;
+
+}
+.titre {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 31px;
+	color: #FFFFFF;
+}
+.haut{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #ffffff;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.menu:link{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000033;
+	/*font-weight:bold;*/
+	text-decoration:none;
+}
+a.menu:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000033;
+	text-decoration:none;
+	font-weight: normal;
+
+}
+a.menu:hover{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:  #000033;
+	text-decoration:underline;
+}
+
+a.disconnect:link{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF0033;
+	text-decoration:none;
+	font-weight: bold;
+
+}
+a.disconnect:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF3300;
+	text-decoration:none;
+	font-weight: bold;
+
+}
+a.disconnect:hover{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:  #000033;
+	text-decoration:underline;
+}
+
+a:link{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #CC0000;
+	/*font-weight:bold;*/
+	text-decoration:none;
+}
+a:visited{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000033;
+	/*font-weight:bold;*/
+	text-decoration:none;
+}
+a:hover{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:  #000033;
+	text-decoration:underline;
+}
+body{
+	font-family:  Arial,"Times New Roman", Times, serif;
+	font-size: 11px;
+	color: #000000;
+}
+td
+{
+	font-family:  Verdana, Arial, "Times New Roman", Times, serif;
+	font-size: 11px;
+	color: #000000;
+}
+th
+{
+	font-family:  Verdana,Arial,"Times New Roman", Times, serif;
+	font-size: 11px;
+	color: #000000;
+}
+tr.head{
+	background-color: #C300FF;
+	color: #C300FF;
+	font-weight: bold;
+
+}
+td.left{
+	background-color: #C300FF;
+	font-weight: bold;
+	color: #000000;
+}
+input{
+background-color:#ffffff;
+border:1px solid #D345FF;
+color:#000000;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+font-weight:normal;
+}
+input.submit{
+background-color:#D345FF;
+border:1px solid #400080;
+color:#FFFFFF;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+font-weight:bold;
+color: #ffffff
+}
+textarea{
+background-color:#ffffff;
+border:1px solid #0066FF;
+color:#000000;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+font-weight:normal;
+}
+select{
+background-color:#FFFFFF;
+border:1px solid #400080;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;
+color: #000000;
+}
+h1 {
+	font-size: 18px;
+	color: #666666;
+	text-align: center;
+
+}
+h2{
+	font-size: 15px;
+	color: #666666;
+	text-align: center;
+
+}
+.error {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF3333;
+	text-decoration: blink;
+}
+.succes {
+	color: #0033FF;
+}
+.copy {
+	font-size: 10px;
+	text-align: center;
+	color: #000000;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+
+}
+.page {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #CC3300;
+}
+.champ {
+	width: 120px;
+	border: thin solid #C300FF;
+
+}
+.remarque {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	color: #FF0000;
+}
+.titreMoyen {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	color: #CC3333;
+}
+.nextprev {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #0033FF;
+}
+tr.headFact{
+	color: #C300FF;
+	font-weight: bold;
+
+}
+.error{
+	color: #000000;
+}

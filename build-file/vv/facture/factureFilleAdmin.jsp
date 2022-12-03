@@ -1,0 +1,280 @@
+<%@page import="user.*" %>
+<%@page import="bean.*" %>
+<%@page import="utilitaire.*" %>
+<%@page contentType="text/html; charset=iso-8859-1" language="java" import="java.sql.*" errorPage="" %>
+<%!
+        String apres="facture/factureFilleAdmin.jsp";
+	String lien= null;
+	facture.SCatService sctserv[] = null;
+	String idClient = null;
+	//facture.Tva tva = null;
+	TypeObjet devEn = null;
+        TypeObjet factEn = null;
+        facture.FactMere fm = null;
+        UserEJB u = null;
+        String idFactMere = null;
+        bean.TypeObjet unite = null;
+        facture.FactureFille ff[]= null;
+        String designation = null;
+        String qte = null;
+        String idUnite = null;
+        String pu = null;
+        String action = null;
+        String idFactureMere = null;
+        String refObj = null;
+        String reductionF = null;
+		facture.Client clt = null;
+		String acte = null;
+        String sCatFille = null;
+		  bean.TypeObjet typepaie[]= null;
+                  TypeObjet dev[] = null;
+		  String idType = null;
+		  historique.MapUtilisateur ut=null;
+      %>
+<%
+action = request.getParameter("action");
+idFactMere = request.getParameter("idFactMere");
+acte = request.getParameter("acte");
+sCatFille = request.getParameter("sCatFille");
+idType = request.getParameter("idTypeFacture");
+try{
+	u=(UserEJB)session.getValue("u");
+	lien=(String)session.getValue("lien");
+	ut=u.getUser();
+	if(ut.getIdrole().compareTo("admin")==0 || ut.getIdrole().compareTo("dg")==0 || ut.getIdrole().compareTo("assistCom")==0)
+	{
+	if(action == null || action.compareTo("red")==0){
+		fm = u.findFactureMere("","",idFactMere,"%","","%","%","%")[0];
+		clt = u.findClient(fm.getIdClient(), "%", "%", "%", "%", "%", "%", "%", "%", "%","%")[0];
+		//tva = u.findTva("%",String.valueOf(fm.getIdTva()), "", "")[0];
+        devEn = u.findTypeObjet("Devise",fm.getIdDeviseEn(),"%")[0];
+		factEn = u.findTypeObjet("Devise", fm.getIdFactureEn(), "%")[0];
+		ff=u.findFactureFille("%","%","%",idFactMere);
+	}
+        if(sCatFille!=null){
+		System.out.println(request.getParameter("idTypeFacture"));
+				idUnite = request.getParameter("unite");
+                designation = request.getParameter("designation");
+                qte = request.getParameter("qte");
+                pu = request.getParameter("pu");
+                reductionF = request.getParameter("reductionF");
+                //String idFactureMere, String refObj, String des, String qte, String unite, String pu, String reductionF
+                u.createFactureFille(request.getParameter("idFactMere"),request.getParameter("idTypeFacture"),designation,qte,request.getParameter("idUnite"),pu,reductionF);
+				ff=u.findFactureFille("%","%","%",idFactMere);
+
+        }
+		typepaie = u.findTypeObjet("TypePaiement","%","%");
+		dev = u.findTypeObjet("Devise", "%", "%");
+		}
+}catch(Exception e){
+%>
+                <script language="JavaScript"> document.location.replace("<%=lien%>?but=erreur.jsp&message=<%=e.getMessage()%>"); </script>
+	<%
+}
+%>
+
+ 
+   <link href="style.css" rel="stylesheet" type="text/css">
+<h1>Cr&eacute;ation d'une facture(3) - Ajout des d&eacute;tails</h1>
+<form action="<%=lien%>?but=facture/apresFactureFinal.jsp" method="post" name="factFille" id="factFille">
+  <table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+	<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+        <tr>
+          <td width="144" height="23" valign="top" class="left">Date :</td>
+          <td width="254" valign="top">&nbsp; <input name="daty" type="text"  class="champ" id="daty" value="<%=Utilitaire.formatterDaty(fm.getDaty())%>" size="10" maxlength="10">
+              <a href="javascript:cal1.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle"></a> 
+            </td>
+        </tr>
+        <tr>
+          <td width="144" height="23" valign="top" class="left">Date d&eacute;but
+            :</td>
+          <td width="254" valign="top">&nbsp; <input name="periodeDebut" type="text" class="champ" id="periodeDebut" value="<%=Utilitaire.formatterDaty(fm.getPeriodeDebut())%>" size="10" maxlength="10">
+              <a href="javascript:cal2.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle"></a></td>
+        </tr>
+        <tr>
+          <td width="144" height="23" valign="top" class="left">Date fin :</td>
+          <td width="254" valign="top">&nbsp; <input name="periodeFin" type="text" class="champ" id="periodeFin" value="<%=Utilitaire.formatterDaty(fm.getPeriodeFin())%>" size="10" maxlength="10">
+              <span class="remarque"><a href="javascript:cal3.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle"></a></span></td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Nom client :</td>
+          <td valign="top">&nbsp; <input name="textfield" type="text" class="champ" value="<%=clt.getNom()%>" disabled></td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Note explicative :</td>
+          <td valign="top">&nbsp; <textarea name="noteExplicative" cols="40" rows="5" class="champ" id="noteExplicative"><%=fm.getNoteExplicative()%></textarea></td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Facture en :</td>
+            <td valign="top"> &nbsp;
+              <select name="idFactureEn" class="champ" id="select2">
+                <%
+				for(int i=0;i<dev.length;i++){
+				%>
+                <option value="<%=dev[i].getId()%>" <%if(dev[i].getId().compareTo(fm.getIdFactureEn())==0)out.print("selected");%>><%=dev[i].getVal()%></option>
+                <%
+                                 }
+				%>
+              </select>
+              </td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Devise en :</td>
+            <td valign="top"> &nbsp;
+              <select name="idDeviseEn" class="champ" id="select">
+                <%
+				for(int i=0;i<dev.length;i++){
+				%>
+                <option value="<%=dev[i].getId()%>" <%if(dev[i].getId().compareTo(fm.getIdDeviseEn())==0)out.print("selected");%>><%=dev[i].getVal()%></option>
+                <%
+                                 }
+				%>
+              </select>
+              </td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Type de paiement :</td>
+            <td valign="top">&nbsp;
+              <select name="idTypePaiement" class="champ" id="idTypePaiement">
+                <%
+				for(int i=0;i<typepaie.length;i++){
+				%>
+                <option value="<%=typepaie[i].getId()%>" <%if(u.findTypeObjet("TypePaiement",fm.getIdTypePaiement(),"%")[0].getId().compareTo(typepaie[i].getId())==0)out.print("selected");%>><%=typepaie[i].getVal()%></option>
+                <%
+                                 }
+				%>
+              </select>
+             </td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">TVA :</td>
+          <td valign="top">&nbsp; <input name="idTva" type="text" class="champ" value="<%=fm.getIdTva()%>" size="3" maxlength="3">
+            % </td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">R&eacute;duction :</td>
+          <td valign="top">&nbsp; <input name="reduction" type="text" class="champ" id="reduction" value="<%=fm.getReduction()%>" size="3" maxlength="3">
+            % </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+
+ <div align="center"><br>
+
+    <input type="hidden" value="<%=fm.getIdClient()%>" name="idClient">
+    <input type="hidden" value="<%=fm.getIdSCatService()%>" name="idSCatService">
+    <input name="acte" type="hidden" id="acte" value="finalise">
+    <input name="idFactMere" type="hidden" id="idFactMere" value="<%=request.getParameter("idFactMere")%>">
+    <br>
+    <input name="submit" type="submit" class="submit" value="Finaliser la facture">
+  </div>
+</form>
+<form name="form1" method="post" action="<%=lien%>?but=<%=apres%>">
+ <table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+  <table width="100%" border="0" cellpadding="3" cellspacing="0" align="center">
+  <!--DWLayoutTable-->
+  <tr class="head">
+    <td  width="200" valign="top">D&eacute;signation</td>
+    <td width="72" valign="top">Quantit&eacute;</td>
+    <td width="68" valign="top">Unit&eacute;</td>
+    <td width="72" valign="top">PU</td>
+      <td  width="50" valign="top">R&eacute;d.</td>
+  </tr>
+  <tr>
+         <td ><input name="designation" type="text" id="designation" size="30" > </td>
+
+      <td width="70"><input name="qte" type="text" id="qte" size="5"  width="70">
+      </td>
+        <td valign="top">
+        <select  name="idUnite" id="idUnite">
+      <%
+          for(int i=0;i<u.findTypeObjet("unite","%","%").length;i++){
+          %>
+
+
+        <option value=<%=u.findTypeObjet("unite","%","%")[i].getId()%>><%=u.findTypeObjet("unite","%","%")[i].getVal()%></option>
+
+
+                <%
+                }
+                %>
+
+            </select></td>
+        <td><input name="pu" type="text" id="pu" size="15" maxlength="15"></td>
+  <td><input name="reductionF" type="text" id="reductionF" dir="rtl" value="0" size="5" maxlength="3"  width="50"></td>
+  </tr>
+
+</table>
+</td></tr></table>
+
+  <input name="action" type="hidden" id="action" value="ajouter">
+  <input name="idFactMere" type="hidden" id="" value="<%=fm.getIdFactureMere()%>">
+  <input name="sCatFille" type="hidden" id="" value="<%=sCatFille%>">
+  <input name="idTypeFacture" type="hidden" value="<%=request.getParameter("idTypeFacture")%>">
+  <br>
+<div align="center">
+        <input type="submit" name="Submit" value="Ajouter" onClick="MM_validateForm('designation','','R','qte','','RisNum','pu','','RisNum');return document.MM_returnValue">
+        <input type="reset" name="Submit2" value="Annuler">
+      </div></form>
+
+<%
+if(ff != null){
+%>
+
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr><td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+
+  <tr class="head">
+    <td width="66"  height="20">&nbsp;RefObjet</td>
+          <td width="132">&nbsp; D&eacute;signation </td>
+          <td width="57"><div align="center">&nbsp; PU</div></td>
+          <td width="41">&nbsp; Qt&eacute; </td>
+          <td width="58">&nbsp; Unit&eacute; </td>
+          <td width="32">&nbsp;R&eacute;d.</td>
+          <td width="142" align="center" valign="middle">&nbsp; Montant</td>
+          <td width="26" align="center" valign="middle">&nbsp;</td>
+        </tr>
+		<%
+
+		for(int i=0;i<ff.length;i++){
+
+        %>
+     <tr>
+          <td width="66"  height="20">&nbsp;<%=ff[i].getRefObj()%></td>
+          <td width="132"><%=ff[i].getDesignation()%> </td>
+          <td width="57"><div align="center"><%=ff[i].getPrixUnitaire()%></div></td>
+          <td width="41"><div align="center"><%=ff[i].getQuantite()%></div></td>
+          <td width="58"><div align="center"><%=u.findTypeObjet("unite",ff[i].getIdUnite(),"%")[0].getVal()%></div></td>
+          <td width="32"><div align="center"><%=ff[i].getReduction()%></div></td>
+          <td width="142" align="center" valign="middle"><%=Utilitaire.formaterAr(ff[i].getMontant())%></td>
+
+    <td width="26" align="center" valign="middle"><a href="<%=lien%>?but=facture/apresFactureFille.jsp&idTypeFacture=<%=request.getParameter("idTypeFacture")%>&idFactMere=<%=idFactMere%>&idFF=<%=ff[i].getIdFactureFille()%>&acte=DELETE&type=ADMIN"><img src="images/button_drop.png" width="11" height="13" border="0" alt="Supprimer"></a></td>
+        </tr>
+        <%
+        }
+		%>
+		</table>
+		</td></tr></table>
+
+
+</form>
+<%
+  }
+%>
+<script language="JavaScript" type="text/JavaScript">
+var cal1 = new calendar1(document.forms['factFille'].elements['daty']);
+cal1.year_scroll = false;
+cal1.time_comp = false;
+var cal2 = new calendar1(document.forms['factFille'].elements['periodeDebut']);
+cal2.year_scroll = false;
+cal2.time_comp = false;
+var cal3 = new calendar1(document.forms['factFille'].elements['periodeFin']);
+cal3.year_scroll = false;
+cal3.time_comp = false;
+</script>

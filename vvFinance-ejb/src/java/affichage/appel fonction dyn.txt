@@ -1,0 +1,20 @@
+fichier jsp
+PageRecherche p=new PageRecherche (new Publicite(),request);
+p.makeChampFormulaire("daty","rep",....);
+p.getTab.setLibelleEntete({"daty","designation","montant"});
+p.getTab.setPropEntete{20,30,50}
+p.preparerData();
+out.println(p.getFormulaire.getHtml());
+out.println(p.getTab.getHtml());
+out.println(p.getSuivant.getHtml());
+
+
+PageRecherche(Object o,request)
+{
+}
+public void makeCritere(String critere)
+{
+}
+
+
+

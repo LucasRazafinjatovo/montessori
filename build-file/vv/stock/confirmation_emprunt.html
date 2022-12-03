@@ -1,0 +1,109 @@
+
+<script language="javascript">
+function page(page_dest){
+        document.location=page_dest;
+}
+function decision(message, url){
+if(confirm(message)) location.href = url;
+}
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>Emprunt </h1>
+<h2>Magasin source</h2>
+<form name="form2" method="post" action="">
+<table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+	
+
+	<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+	 <tr>
+          <td  valign="top" class="left">Référence mouvement :</td>
+          <td  valign="top">&nbsp;MVT001
+          </td>
+        </tr>
+        <tr>
+          <td  valign="top" class="left">Date :</td>
+          <td  valign="top">&nbsp;10/08/2008
+          </td>
+        </tr>
+        <tr>
+          <td  valign="top" class="left">Designation
+            :</td>
+          <td valign="top">&nbsp;designation</td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Valeur</td>
+          <td valign="top">&nbsp;25&nbsp;Tonnes</select>
+		  </td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Magasin Source </td>
+          <td valign="top">&nbsp;<font color="#003399">Magasin2</font>
+		  </td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Remarque :</td>
+          <td valign="top">&nbsp;Transfert entre magasin</td>
+        </tr>
+      
+      </table></td>
+  </tr>
+</table>
+ <div align="center">
+    
+      <input type="hidden" value="finalise" name="acte">
+
+    <p>
+      <input name="button" type="button" class="submit" onclick="page('dossier_mouvement.html')" value="Ajouter dossier" />
+    </p>
+  </div>
+
+<h2>Tiers</h2>
+
+<table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+	
+
+	<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+	 <tr>
+          <td  valign="top" class="left">Référence mouvement :</td>
+          <td  valign="top">&nbsp;MVT002
+          </td>
+        </tr>
+		 <tr>
+          <td  valign="top" class="left">Tiers :</td>
+          <td  valign="top">&nbsp;40112 - Entreprise emprunteur
+          </td>
+        </tr>
+        <tr>
+          <td  valign="top" class="left">Date :</td>
+          <td  valign="top">&nbsp;10/08/2008
+          </td>
+        </tr>
+       
+        <tr>
+          <td valign="top" class="left">Valeur</td>
+          <td valign="top">&nbsp;25&nbsp;Tonnes</select>
+		  </td>
+        </tr>
+       
+        <tr>
+          <td valign="top" class="left">Remarque :</td>
+          <td valign="top">&nbsp;Transfert entre magasin</td>
+        </tr>
+      
+      </table></td>
+  </tr>
+</table>
+
+  <div align="center">
+    
+      <input type="hidden" value="finalise" name="acte">
+
+    <p>
+      <input type="button" onclick="page('dossier_mouvement.html')" class="submit" value="Ajouter dossier">
+    </p>
+  </div>
+</form>

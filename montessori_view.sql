@@ -1,0 +1,154 @@
+-- CREATE VIEW ETUDIANT_ANNEESCOLAIRE AS
+-- 	SELECT
+-- 	e.id id,
+-- 	e.nom nom,
+-- 	e.prenom prenom,
+-- 	ie.idniveau idniveau,
+-- 	n.nom niveau,
+-- 	ie.idanneescolaire idanneescolaire,
+-- 	a.nom anneescolaire,
+--     ie.idecole idecole,
+-- 	ec.nom ecole,
+--     ie.moisdebut moisdebut,
+-- 	ie.idtarif idtarif
+-- 	FROM etudiant e
+-- 	left JOIN inscriptionetudiant ie ON ie.IDETUDIANT = e.ID
+-- 	left JOIN niveau n ON ie.idniveau=n.ID 
+-- 	left JOIN anneescolaire a ON ie.IDANNEESCOLAIRE =a.id
+--     left JOIN ecole ec ON ie.idecole =ec.id
+-- 	where e.id NOT IN (SELECT idetudiant from abondantetudiant)
+-- 	order by ie.idetudiant;
+
+-- CREATE VIEW etudiant_abondant AS
+-- 		SELECT
+-- 		a.idetudiant id,
+-- 		e.nom nom,
+-- 		e.prenom prenom,
+-- 		a.motif motif,
+-- 		a.mois mois,
+-- 		a.annee annee
+-- 		FROM abondantetudiant a
+-- 		JOIN etudiant e ON a.IDETUDIANT = e.ID;
+
+-- CREATE VIEW etudiantencours AS
+-- 		SELECT e.id as idetudiant,e.nom,e.prenom,e.idecole,e.ecole,e.idniveau,e.niveau,e.idanneescolaire,e.anneescolaire,e.idtarif,t.designation,t.montant
+-- 		from ETUDIANT_ANNEESCOLAIRE e
+-- 		join tarif t on e.idtarif=t.id
+-- 		where e.anneescolaire=(select nom from anneeencours);
+
+-- create view facturemerefille AS
+-- 	select
+-- 	fm.id idfacturemere,
+-- 	fm.idetudiant idetudiant,
+-- 	fm.mois moisint,
+-- 	MOIS_ANG.VAL mois,                 
+-- 	fm.annee annee,
+-- 	fi.id idfacturefille,
+-- 	fi.designation designation,
+-- 	fi.montant montant,
+-- 	ie.idecole idecole,
+-- 	e.nom ecole
+-- 	from facturemere fm
+-- 	join facturefille fi on fm.id=fi.idfacturemere
+-- 	join inscriptionetudiant ie on fm.idetudiant=ie.idetudiant
+-- 	join ecole e on ie.idecole=e.id
+-- 	JOIN MOIS_ANG ON MOIS_ANG.ID = fm.mois;
+
+-- create VIEW etat_analyse_paiement AS
+-- 	select 
+-- 	fi.id id,
+-- 	fm.idetudiant idetudiant,
+-- 	fi.designation designation,
+-- 	fm.mois moisint,
+-- 	MOIS_ANG.VAL mois,
+-- 	fm.annee annee,
+-- 	p.idcaisse idcaisse,
+-- 	c.desccaisse caisse,
+-- 	ie.idecole idecole,
+-- 	e.nom ecole,
+-- 	fi.montant montantapayer,
+-- 	sum(p.montant) montantdejapayer,
+-- 	(fi.montant-sum(p.montant)) resteapayer
+-- 	from paiement p
+-- 	join facturefille fi on p.idfacture=fi.id
+-- 	join facturemere fm on fi.idfacturemere=fm.id
+-- 	join caisse c on p.idcaisse=c.idcaisse
+-- 	JOIN MOIS_ANG ON MOIS_ANG.ID = fm.mois
+-- 	join inscriptionetudiant ie on fm.idetudiant=ie.idetudiant
+--     join ecole e on ie.idecole=e.id
+-- 	group by p.idfacture,p.idcaisse,fm.idetudiant,fm.mois,fm.annee,fi.id,fi.designation,c.idcaisse,c.desccaisse,MOIS_ANG.VAL,fi.montant,ie.idecole,e.nom;
+
+-- create view report_caisse as
+-- 	select 
+-- 	r.id id,
+-- 	r.montant montant,
+-- 	r.daty daty,
+-- 	r.idcaisse idcaisse,
+-- 	c.desccaisse caisse,
+--     r.idecole idecole,
+--     e.nom ecole
+-- 	from report r 
+-- 	join caisse c on r.idcaisse=c.idcaisse
+--     join ecole e on r.idecole=e.id;
+
+-- CREATE VIEW etatdecaisse as
+-- SELECT
+-- 	r.*,
+-- 	nvl(mvt.debit,0) debit,
+-- 	nvl(mvt.credit,0) credit,
+-- 	(nvl(r.MONTANT,0)+nvl(mvt.credit,0)-nvl(mvt.debit,0)) reste,
+-- 	maxdaty.daty datydernier,
+-- 	c.desccaisse caisse,
+-- 	e.nom ecole
+-- FROM 
+-- 	report r,
+-- 	caisse c,
+-- 	ecole e,
+-- 	(
+-- 		select 
+-- 			idcaisse,IDECOLE ,max(daty) AS daty 
+-- 		from 
+-- 			report
+-- 		WHERE 
+-- 			daty<=SYSDATE
+-- 		GROUP BY idcaisse,IDECOLE
+-- 	) maxdaty,
+-- 	(
+-- 		SELECT
+-- 			sum(nvl(mvt.debit,0)) debit,
+-- 			sum(nvl(mvt.credit,0)) credit,
+-- 			mvt.idcaisse idcaisse,
+-- 			mvt.IDECOLE  IDECOLE 
+-- 		FROM 
+-- 			MVTCAISSE mvt,
+-- 			(
+-- 				select 
+-- 					idcaisse,IDECOLE ,max(daty) AS daty 
+-- 				from 
+-- 					report
+-- 				WHERE 
+-- 					daty<=SYSDATE
+-- 				GROUP BY idcaisse,IDECOLE
+-- 			) maxdaty
+-- 		WHERE 
+-- 			mvt.IDCAISSE =maxdaty.idcaisse
+-- 			AND mvt.idecole=maxdaty.idecole 
+-- 			AND mvt.DATY>=maxdaty.daty
+-- 		GROUP BY 
+-- 			mvt.idcaisse,
+-- 			mvt.idecole
+-- 	) mvt
+-- WHERE 
+-- 	r.idcaisse=maxdaty.idcaisse 
+-- 	AND r.idecole=maxdaty.idecole
+-- 	AND r.daty=maxdaty.daty
+-- 	AND r.idcaisse=mvt.idcaisse(+)
+-- 	AND r.idecole=mvt.IDECOLE(+)
+-- 	AND r.idcaisse=c.idcaisse(+)
+-- 	AND r.idecole=e.id;
+
+	
+	
+
+
+	

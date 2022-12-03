@@ -1,0 +1,84 @@
+
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>Lister verification </h1>
+<p align="center" class="remarque">(choisir les crit&egrave;res de votre recherche
+  concernant les livraisons)</p>
+<form action="<%=lien%>?but=<%=apres%>" method="post" name="listeRecette" id="listeRecette">
+  <table border="0" cellpadding="0" cellspacing="0" align="center" width="600">
+    <tr>
+      <td><table width="100%" border="0" align="center" cellpadding="2" cellspacing="0" class="monographe">
+	   <tr>
+            <td class="left">Controleur :</td>
+            <td align="center"><input name="controleur" type="text"   id="fournisseur" value="<%=fournisseur%>"size="10" maxlength="10" /> &nbsp; <img src="images/blank.gif" width="16" height="16" align="absmiddle" />
+            </td>
+            <td class="left">Magasin</td>
+            <td align="center"><input name="magasin" type="text"   id="magasin" value="<%=projet%>"size="10" maxlength="10" />
+              &nbsp; <img src="images/blank.gif" width="16" height="16" align="absmiddle" />
+            </td>
+          </tr>
+          <tr>
+            <td class="left">Date début :</td>
+            <td align="center"><input name="dateDebut" type="text"   id="dateDebut" value="<%=dateDebut%>" size="10" maxlength="10" />
+              &nbsp; <a href="javascript:cal1.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle" /></a>
+            </td>
+            <td class="left">Date fin:</td>
+            <td align="center"><input name="dateFin" type="text"   id="dateFin" value="<%=dateFin%>" size="10" />
+              &nbsp; <a href="javascript:cal2.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle" /></a>
+            </td>
+          </tr>
+         
+          
+        </table></td>
+    </tr>
+  
+    <tr>
+      <td height="30" align="center"> <table width="75%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center"> <input type="submit" name="Submit" value="Afficher" class="submit">            </td>
+            <td align="center"> <input type="reset" name="annuler" value="R&eacute;tablir" class="submit">            </td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+
+
+</form>
+
+
+<table border="0" cellpadding="0" cellspacing="0" align="center" width="600">
+  <tr>
+    <td>
+      <br>
+      <p align="center"><strong><u>LISTE</u></strong></p>
+      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="monographe">
+        <!--DWLayoutTable-->
+        <tr class="head">
+
+          <td align="center" valign="top">id</td>
+		   <td align="right" valign="top"><div align="center">Controleur</div></td>
+          <td align="right" valign="top"><div align="center">Magasin</div></td>
+          <td align="right" valign="top"><div align="center"><strong>Date</strong></div></td>
+		  <td align="right" valign="top"><div align="center"><strong>Reste</strong></div></td>
+        </tr>
+     
+        <tr onmouseover="this.style.backgroundColor='#EAEAEA'" onmouseout="this.style.backgroundColor=''">
+
+          <td align="center"></td>
+          <td align="right"></td>
+		  <td align="center"></td>
+          <td align="right"></td>
+      </table></td>
+</tr>
+</table>
+<br>
+
+
+
+<script language="javascript">
+  var cal1 = new calendar1(document.forms['listeRecette'].elements['dateDebut']);
+  cal1.year_scroll = false;
+  cal1.time_comp = false;
+  var cal2 = new calendar1(document.forms['listeRecette'].elements['dateFin']);
+  cal2.year_scroll = false;
+  cal2.time_comp = false;
+</script>

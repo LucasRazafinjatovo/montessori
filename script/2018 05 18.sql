@@ -1,0 +1,19 @@
+CREATE TABLE MouvementEtudiant(
+	ID VARCHAR2(50) PRIMARY KEY,
+	Etudiant VARCHAR2(100),
+	Daty DATE,
+	Motif VARCHAR2(100),
+	type VARCHAR2(100)
+);
+CREATE SEQUENCE SEQ_MouvementEtudiant;
+
+CREATE or REPLACE
+FUNCTION GETSEQ_MouvementEtudiant
+   RETURN NUMBER
+IS
+   retour   NUMBER;
+BEGIN
+   SELECT SEQ_MouvementEtudiant.NEXTVAL INTO retour FROM DUAL;
+
+   RETURN retour;
+END;

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Document sans nom</title>
+</head>
+
+<body>
+</body>
+</html>
+
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>Lister les d&eacute;penses</h1>
+<p align="center" class="remarque">(choisir les crit&egrave;res de votre recherche
+  concernant les d&eacute;penses)</p>
+
+<form  method="post" name="listeDepenses" id="listeDepenses">
+  <table border="0" cellpadding="0" cellspacing="0" align="center" width="600">
+    <tr>
+      <td> <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="monographe">
+        <tr>
+          <td class="left">Date d&eacute;but :</td>
+          <td><input name="datyInf" type="text" class="champ" id="datyInf" value="<%=dateDebut%>" size="10" maxlength="10" />
+            <a href="javascript:cal1.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width="16" height="16" border="0" align="absmiddle" /></a></td>
+          <td class="left">Date fin:</td>
+          <td><input name="datySup" type="text" class="champ" id="datySup" value="<%=dateFin%>" size="10" />
+            <a href="javascript:cal2.popup()"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width="16" height="16" border="0" align="absmiddle" /></a></td>
+        </tr>
+        <tr>
+          <td class="left">D&eacute;signation :</td>
+          <td><input name="designation" type="text" class="champ" id="designation" value="%"/></td>
+          <td class="left">Projet :</td>
+          <td><input name="projet" type="text" class="champ" id="projet" size="10" value="%"/></td>
+        </tr>
+        <tr>
+          <td class="left">Caisse :</td>
+          <td ><select name="caisse" class="champ">
+              <option value="%">Tous</option>
+              <%
+	  for(int i=0;i<caiss.length;i++){
+	  %>
+              <option value="<%=caiss[i].getIdCaisse()%>" <%if(caiss[i].getIdCaisse().compareTo(caisse)==0)out.print("selected");%>><%=caiss[i].getDescCaisse()%></option>
+              <%
+		}
+		%>
+          </select></td>
+          <td class="left">Facture : </td>
+          <td><input name="facture" type="text" class="champ" id="facture" size="10" value="%"/>          </td>
+        </tr>
+        <tr>
+          <td class="left">Partenaire :</td>
+          <td align="center"><div align="left">
+              <input name="partenaire" type="text" class="champ" id="partenaire" value="%" />
+            &nbsp; <img src="images/blank.gif" width="16" height="16" align="absmiddle" /> </div></td>
+          <td class="left">&nbsp;</td>
+          <td align="center">&nbsp;</td>
+        </tr>
+          
+        </table></td>
+    </tr>
+	</table>
+	</form>
+	
+	
+<script language="JavaScript">
+/*var cal1 = new calendar1(document.forms['listeDepense'].elements['datyInf']);
+cal1.year_scroll = false;
+cal1.time_comp = false;
+var cal2 = new calendar1(document.forms['listeDepense'].elements['datySup']);
+cal2.year_scroll = false;
+cal2.time_comp = false;*/
+</script>

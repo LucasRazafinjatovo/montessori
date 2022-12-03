@@ -1,0 +1,66 @@
+<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25@ page import=%22user.*%22 %25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25@ page import=%22utilitaire.*%22 %25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25!
+        UserEJB u = null;
+        String acte=null;
+        String id=null;
+        String lien=%22modele.jsp%22;
+        vente.Vente temp=null;
+        int rep;
+%25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25
+  acte=request.getParameter(%22acte%22);
+lien=(String)session.getValue(%22lien%22);
+	try
+	{
+           u=(UserEJB)session.getAttribute(%22u%22);
+          if (acte.compareTo(%22UPDATE%22)==0)
+          {
+          rep=u.updateEntree(request.getParameter(%22id%22),request.getParameter(%22date%22),request.getParameter(%22designation%22),request.getParameter(%22idClient%22),request.getParameter(%22idType%22),request.getParameter(%22numPiece%22),request.getParameter(%22montant%22),request.getParameter(%22idMode%22));
+           %25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+  			<script language="JavaScript"> document.location.replace("<%=lien%>?but=finance/listeUpdateEntree.jsp&daty1=<%=request.getParameter("daty")%>&daty2=<%=request.getParameter("daty")%>"); </script>
+  			<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25
+          }
+          if (acte.compareTo(%22INSERT%22)==0)
+          {
+            rep=u.createEntree(request.getParameter(%22date%22),request.getParameter(%22designation%22),request.getParameter(%22idClient%22),request.getParameter(%22idType%22),request.getParameter(%22numPiece%22),request.getParameter(%22montant%22),request.getParameter(%22idMode%22));
+            %25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+  			<script language="JavaScript"> document.location.replace("<%=lien%>?but=finance/listeEntree.jsp&daty1=<%=request.getParameter("daty")%>&daty2=<%=request.getParameter("daty")%>"); </script>
+  			<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25
+          }
+          if (acte.compareTo(%22DELETE%22)==0)
+          {
+            rep=u.deleteEntree(request.getParameter(%22id%22));
+           %25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+ 		 <script language="JavaScript"> document.location.replace("<%=lien%>?but=finance/listeUpdateEntree.jsp&daty1=<%=Utilitaire.dateDuJour()%>&daty2=<%=Utilitaire.dateDuJour()%>"); </script>
+  			<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25
+          }
+        }catch (Exception e){
+		%25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+		<script language="JavaScript"> document.location.replace("<%=lien%>?but=finance/Entree.jsp&message=<%=e.getMessage()%>"); </script>
+		<MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25
+		return;
+		}
+		%25%3E" ><MM_JSPSCRIPT><MM:EndLock>
+
+
+<head>
+<title>Document sans titre</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<table width="425" border="0" cellspacing="0">
+  <tr>
+    <td><div align="justify"><font size="2" face="Geneva, Arial, Helvetica, sans-serif">Votre
+        action a &eacute;t&eacute; faite avec succ&egrave;s. son reference est
+        <a href="<%=lien%>?id=<%=rep%>&but=finance/DetailEntree.jsp"><MM:BeginLock translatorClass="MM_JSPSCRIPT" type="script" depFiles="" orig="%3C%25=rep%25%3E" ><MM_JSPSCRIPT><MM:EndLock></a></font></div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

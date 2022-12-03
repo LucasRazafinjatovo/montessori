@@ -1,0 +1,75 @@
+
+<script language="javascript">
+function page(page_dest){
+        document.location=page_dest;
+}
+function decision(message, url){
+if(confirm(message)) location.href = url;
+}
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>index</h1>
+
+<form name="form2" method="post" action="<%=lien%>?but=facture/apresFactureFinal.jsp">
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr class="head">
+        <td width="66"  height="20">&nbsp;Rubrique</td>
+        <td width="132">&nbsp; action </td>
+        <td width="142" align="center" valign="middle">&nbsp;page</td>
+        
+      </tr>
+     
+      <tr>
+        <td><strong>Livraison</strong></td>
+        <td>Enregistrement livraison</td>
+        <td align="center" valign="middle"><a href="saisie_livraison.html">saisie_livraison.html</a></td>
+      
+      </tr>
+	  
+         <tr>
+        <td></td>
+        <td >Enregistrer les bobines rattachées à la livraison</td>
+        <td align="center" valign="middle"><a href="saisir_bobine_livraison.html">saisir_bobine_livraison.html</a></td>
+      
+      </tr>
+	   <tr>
+        <td></td>
+        <td >Lister  les livraisons </td>
+        <td align="center" valign="middle"><a href="liste_livraison.html">liste_livraison.html</a></td>
+      
+      </tr>
+	  <tr>
+        <td><strong>Mvt entre dépot</strong></td>
+        <td>Enregistrement du mouvement </td>
+        <td align="center" valign="middle"><a href="mouvement_entre_depot.html">mouvement_entre_depot.html</a></td>
+      
+      </tr>
+	   <tr>
+        <td></td>
+        <td >Enregistrement dossier pour le mouvement </td>
+        <td align="center" valign="middle"><a href=""></a></td>
+      
+      </tr>
+	   <tr>
+        <td><strong>Saisie impression</strong></td>
+        <td >Enregistement de la parution</td>
+        <td align="center" valign="middle"><a href="saisie_parution.html">saisie_parution.html</a></td>
+      
+      </tr>
+	   <tr>
+        <td><strong>Saisie emprunt</strong></td>
+        <td >Enregistement de l'emprunt</td>
+        <td align="center" valign="middle"><a href="emprunt.html">emprunt.html</a></td>
+      
+      </tr>
+	   <tr>
+        <td><strong>Retour emprunt</strong></td>
+        <td >Enregistrer le retour de l'emprunt</td>
+        <td align="center" valign="middle"><a href="liste_emprunt.html">liste_emprunt.html</a></td>
+      
+      </tr>
+    </table></td>
+  </tr>
+</table>

@@ -1,0 +1,41 @@
+<html>
+<script src="jquery.js"></script>
+<script language="javascript">
+function addNumbers(){
+ // use get method to make an AJAX call to addnumbers.jsp
+ //$.get( "number.jsp",{num1 : $("#num1").val(), num2 : $("#num2").val()},doUpdate);
+  $.ajax( {
+        type: "GET",
+        url: "number.jsp",
+        data: {num1 : $("#num1").val(), num2 : $("#num2").val()},
+        dataType: "json",
+        success: function(data) {
+          doUpdate(data);
+        },
+        error:function(xhr){
+                //var ef=eval("("+xhr.responseText+")");
+                alert ("errir "+xhr.responseText);
+              }
+
+  });
+}
+function doUpdate(response)
+{
+  if (response) {
+      $("#result").val(response);
+  }
+}
+</script>
+<body bgcolor="#ffff66">
+ <form id="form1" >
+  <h2>Using AJAX to Add Numbers with JQUERY</h2>
+   <table>
+    <tr><td> First Number : </td> <td><input type=text id="num1"></td></tr>
+    <tr><td> Second Number :</td><td> <input type=text id="num2" ></td></tr>
+    <tr><td> Result:</td><td> <input type=text readonly id="result" ></td></tr>
+   </table>
+   <br />
+   <input type=button ID="Button1" runat="server"  onclick="addNumbers()"  value="Add Numbers" />
+  </form>
+</body>
+</html>

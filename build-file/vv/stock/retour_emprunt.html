@@ -1,0 +1,62 @@
+
+<script language="javascript">
+function page(page_dest){
+        document.location=page_dest;
+}
+function decision(message, url){
+if(confirm(message)) location.href = url;
+}
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>Emprunt </h1>
+
+<form name="form2" method="post" action="">
+<table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+		<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+        <tr>
+          <td width="144" height="23" valign="top" class="left">Date :</td>
+          <td width="254" valign="top">&nbsp; <input name="date" type="text" class="champ" id="date" value="" size="10" maxlength="10"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle">
+          </td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Designation
+            :</td>
+          <td valign="top">&nbsp; <input name="designation" type="text" class="champ" id="designation" value="" size="10" maxlength="10"></td>
+        </tr>
+        <tr>
+          <td  height="23" valign="top" class="left">Quantité</td>
+          <td valign="top">&nbsp; <input name="valeur" type="text" class="champ" id="valeur" value="" size="10" maxlength="10"> 
+		  unite<select name="unite"><option>kg</option><option>Tonne</option><option>nombre</option></select>
+		  </td>
+        </tr>
+        <tr>
+          <td  height="23" valign="top" class="left">Magasin source </td>
+          <td valign="top">&nbsp; <select name="magasin"><option>Magasin1</option><option>Magasin2</option><option>Magasin3</option></select>
+		  </td>
+        </tr>
+		<tr>
+          <td  height="23" valign="top" class="left">Tiers </td>
+          <td valign="top">&nbsp; <input name="tiers" type="text" class="champ" id="designation" value="" size="10" maxlength="10"><input type="button" id="designation" value="..." >
+		  </td>
+        </tr>
+        <tr>
+          <td height="23" valign="top" class="left">Remarque :</td>
+          <td valign="top">&nbsp; <textarea name="noteExplicative" cols="40" rows="5"></textarea></td>
+        </tr>
+      
+      </table></td>
+  </tr>
+</table>
+
+
+  <div align="center">
+    
+      <input type="hidden" value="finalise" name="acte">
+
+    <p>
+      <input type="button" onclick="page('dossier_mouvement.html')" class="submit" value="Continuer">
+    </p>
+  </div>
+</form>

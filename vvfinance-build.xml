@@ -1,0 +1,126 @@
+<project name="deploy-ejb" default="deploy" basedir="./build-file">
+    <property environment="env"/>
+    <property name="deploy.dir" value="E:\Environnement\wildfly-10.0.0.Final\standalone\deployments"/>
+    <property name="vvFinance-warname" value="vv.war"/>
+    <property name="vvFinance-jarname" value="vvFinance-ejb.jar"/>
+    <property name="vvFinance-earname" value="vv.ear"/>
+    <property name="srcejb-dir" value="./vvFinance-ejb/src/"/>
+    <property name="srcwar-dir" value="./vvFinance-war/src/java"/>
+    
+    <property name="build-vvFinance-war_war" value="${basedir}/vv_war" />
+    <property name="build-vvFinance-ejb_jar" value="${basedir}/vvFinance-ejb_jar" />
+    <property name="build-vvFinance-lib" value="${basedir}/lib" />
+    
+    <property name="buildEar.dir" value="${basedir}/ear"/>
+    <property name="webcontent.dir" value="../vvFinance-war/web"/>
+    
+    <path id="classpath">
+        <fileset dir="${basedir}\lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+	
+	
+
+	
+    <target name="clean" >
+        <echo>JDK ${ant.java.version}  ${ant.version}  </echo>
+        <echo> clean </echo>
+        
+        <delete file="${build-vvFinance-ejb_jar}" />
+        <delete file="${build-vvFinance-war_war}" />
+        <delete file="${build-vvFinance-lib}" />
+        <delete file="${basedir}/${vvFinance-earname}" />
+        <delete file="${buildEar.dir}/${vvFinance-earname}" />
+		
+        <echo> clean done </echo>
+    </target>
+    
+     <tstamp>
+	  <format property="dateDuJour" pattern="dd/MM/yyyy hh:mm aa" />
+	</tstamp>
+	
+    <target name="init" depends="clean">
+        <echo> initialisation </echo>
+        
+        <mkdir dir="${build-vvFinance-war_war}"/>
+        <mkdir dir="${build-vvFinance-war_war}/WEB-INF"/>
+        <mkdir dir="${build-vvFinance-war_war}/WEB-INF/lib"/>
+        <mkdir dir="${build-vvFinance-war_war}/WEB-INF/classes"/>
+        <mkdir dir="${build-vvFinance-war_war}/WEB-INF/classes/META-INF"/>
+        
+        <mkdir dir="${build-vvFinance-ejb_jar}"/>
+        
+        
+        <echo file="${webcontent.dir}/dateBuild.txt" append="false" message="${dateDuJour}" />
+        
+        <copy todir="${build-vvFinance-war_war}/">
+            <fileset dir="${webcontent.dir}" excludes="WEB-INF/**"/>
+        </copy>
+        <copy todir="${build-vvFinance-war_war}/WEB-INF/lib/">
+            <fileset dir="${basedir}\lib" />
+        </copy>
+
+        <!--<copy file="../vvFinance-war/web/WEB-INF/web.xml" tofile="${build-vvFinance-war_war}/WEB-INF/web.xml" />-->
+        <copy file="../vvFinance-ejb/src/java/vvFinance.properties" tofile="${build-vvFinance-ejb_jar}/vvFinance.properties" />
+		
+		
+        <echo>  initialisation done </echo>
+    </target>
+	
+    <target name="compile" depends="init">
+        <echo> compilation </echo>	
+        <javac srcdir="../vvFinance-ejb/src/java" destdir="${build-vvFinance-ejb_jar}" nowarn="true" debug="on" deprecation="off" classpathref="classpath" includeantruntime="false"
+         encoding="iso-8859-1">
+        </javac>
+        <copy todir="${build-vvFinance-ejb_jar}/i18n">
+            <fileset dir="../vvFinance-ejb/src/java/i18n" includes="**/*.properties" />
+        </copy>
+        <echo> compilation done </echo>	
+    </target>
+    
+    <target name="buildEjbJar" depends="compile">
+        <echo>Build EJB JAR</echo>
+        <jar basedir="${build-vvFinance-ejb_jar}" destfile="${buildEar.dir}/${vvFinance-jarname}" />
+        <copy file="${buildEar.dir}/${vvFinance-jarname}" todir="${build-vvFinance-war_war}/WEB-INF/lib/">
+        </copy>
+        <echo>End Build EJB JAR</echo>
+    </target>
+
+    <target name="compileWar" depends="buildEjbJar">
+        <echo> compilation </echo>
+        <javac srcdir="../vvFinance-war/src/java" destdir="${build-vvFinance-war_war}/WEB-INF/classes/" nowarn="true" debug="on" deprecation="off" classpathref="classpath" includeantruntime="false"
+         encoding="iso-8859-1">
+            <classpath>
+                <pathelement location="${buildEar.dir}/${vvFinance-jarname}" />
+            </classpath>
+        </javac>
+        <echo> compilation done</echo>
+    </target>
+	
+    <target name="jar" depends="compileWar">
+        <echo> compression </echo>			
+        <jar basedir="${build-vvFinance-war_war}" destfile="${buildEar.dir}/${vvFinance-warname}" includes="**"/>
+        <jar basedir="${buildEar.dir}" destfile="${basedir}/${vvFinance-earname}"  includes="**" />
+		
+        <echo> compression done </echo>	
+    </target>
+	
+    <target name="deploy" depends="jar">	
+	   <echo>${env.JBOSS_HOME}</echo>
+        <!--<echo> deployement ear </echo>-->
+        <!--                <copy todir="${deploy.dir}">
+            <fileset dir="${build.dir}" >
+                <include name="${ketrika-earname}"/>
+            </fileset>	
+        </copy>-->
+        <delete file="${deploy.dir}/${vvFinance-earname}" />
+        <copy todir="${deploy.dir}">
+            <fileset dir="${basedir}" >
+                <include name="${vvFinance-earname}"/>
+            </fileset>	
+        </copy>
+        <echo> deployement ear done </echo>	
+        
+    </target>	
+</project>

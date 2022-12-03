@@ -1,0 +1,26 @@
+package finance;
+
+import bean.*;
+import java.sql.*;
+import java.util.Vector;
+
+
+/**
+ * <p>Title: Gestion des recettes </p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2005</p>
+ * <p>Company: </p>
+ * @author unascribed
+ * @version 1.0
+ */
+
+public class DetailMvtCaisseUtil extends GenUtil {
+
+  public DetailMvtCaisseUtil() {
+    super("DetailMvtCaisse","finance.DetailMvtCaisse");
+  }
+  public Object[] resultatLimit(int numBloc, ResultSet rs) {
+    /**@todo Implement this bean.GenUtil abstract method*/
+    throw new java.lang.UnsupportedOperationException("Method resultatLimit() not yet implemented.");
+  }
+ }

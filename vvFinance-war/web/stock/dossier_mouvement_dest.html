@@ -1,0 +1,155 @@
+
+<script language="javascript">
+function page(page_dest){
+        document.location=page_dest;
+}
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+<h1>Enregistrement dossier pour un mouvement entre dépôt</h1>
+
+<form name="form2" method="post" action="<%=lien%>?but=facture/apresFactureFinal.jsp">
+<table width="450" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+	<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+	 <tr>
+          <td  valign="top" class="left">Référence mouvement :</td>
+          <td  valign="top">&nbsp;MVT001
+          </td>
+        </tr>
+        <tr>
+          <td  valign="top" class="left">Date :</td>
+          <td  valign="top">&nbsp;10/08/2008
+          </td>
+        </tr>
+        <tr>
+          <td  valign="top" class="left">Designation
+            :</td>
+          <td valign="top">&nbsp;designation</td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Valeur</td>
+          <td valign="top">&nbsp;25&nbsp;Tonnes</select>
+		  </td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Magasin Source </td>
+          <td valign="top">&nbsp;<font color="#003399">Magasin2</font>
+		  </td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Remarque :</td>
+          <td valign="top">&nbsp;Transfert entre magasin</td>
+        </tr>
+      
+      </table></td>
+  </tr>
+</table>
+
+
+</form>
+
+<hr align="center" color="#0099FF" noshade size="1" width="85%">
+
+<h1>Ajouter dossier </h1>
+<form name="form1" method="post" action="../../application/05-08-08/affichage/facture/<%=lien%>?but=<%=apres%>">
+ <table width="500" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr>
+    <td>
+  <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" class="formadd">
+        
+        <tr>
+          <td valign="top" class="left">Designation
+            :</td>
+          <td valign="top" colspan="3">&nbsp; <input name="designation" type="text"  class="champ" id="designation" value="" size="20" maxlength="10"></td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Numéro</td>
+          <td valign="top" colspan="3">&nbsp; <input name="numero" type="text"  class="champ" id="valeur" value="" size="20" maxlength="10"> 
+		 
+		  </td>
+        </tr>
+		<tr>
+          <td  valign="top" class="left">Date :</td>
+          <td valign="top" colspan="3">&nbsp; <input name="date" type="text" disabled class="champ" id="date" value="" size="10" maxlength="10"><img src="calendar/img/cal.gif" alt="Cliquez ici pour choisir une date" width=16 height=16 border=0 align="absmiddle">
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" class="left">Tiers</td>
+          <td valign="top"  colspan="3"> &nbsp; <input name="tiers" type="text" class="champ" id="tiers" value="" size="10" maxlength="10"><input type="button" id="tiers" value="...">
+		  </td>
+        </tr>
+		<tr>
+          <td  valign="top" class="left">Quantité Tot</td>
+          <td valign="top" > &nbsp; <input name="tiers" type="text" class="champ" id="tiers" value="" size="10" maxlength="10">
+		  </td>
+		   <td valign="top" class="left">Montant Tot</td>
+          <td valign="top" > &nbsp; <input name="tiers" type="text" class="champ" id="tiers" value="" size="10" maxlength="10">
+		  </td>
+        </tr>
+        <tr>
+          <td  valign="top" class="left">Remarque :</td>
+          <td valign="top" colspan="3">&nbsp; <textarea name="noteExplicative" cols="40" rows="5"></textarea></td>
+        </tr>
+      
+      </table>
+</td></tr></table>
+
+  <input name="action" type="hidden" id="action" value="ajouter">
+  <input name="idMvmt" type="hidden" id="" value="">
+  <br>
+<div align="center">
+        <input type="submit" name="Submit" value="Ajouter" onClick="MM_validateForm('designation','','R','qte','','RisNum','pu','','RisNum');return document.MM_returnValue">
+        <input type="reset" name="Submit2" value="Annuler">
+		 <input type="button" onclick="page('index.html')" name="Submit2" value="Terminer">
+  </div></form>
+
+<%
+if(ff != null){
+%>
+
+<table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="monographe">
+  <tr><td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+
+  <tr class="head">
+    <td width="66"  height="20">&nbsp;RefObjet</td>
+          <td width="132">&nbsp; D&eacute;signation </td>
+          <td width="57"><div align="center">&nbsp;Numéro</div></td>
+          <td width="41">&nbsp; Qt&eacute; </td>
+          <td width="58">&nbsp; Montant </td>
+          <td width="32">&nbsp;Tiers.</td>
+          <%
+%>
+          <td width="26" align="center" valign="middle">&nbsp;</td>
+<%
+%>
+        </tr>
+		<%
+
+		for(int i=0;i<ff.length;i++){
+
+        %>
+     <tr>
+          <td width="66"  height="20"></td>
+          <td width="132"></td>
+          <td width="57"></td>
+          <td width="41"></td>
+          <td width="58"></td>
+          <td width="32"></td>
+          <td width="26" align="center" valign="middle">
+	<a href="javascript:decision('Vous voulez vraiment cet élément de la facture?','<%=lien%>?but=facture/apresFactureFille.jsp&idFactMere=<%=idFactMere%>&idFF=<%=ff[i].getIdFactureFille()%>&acte=DELETE&type=USER')">
+<img src="../../application/05-08-08/affichage/facture/images/button_drop.png" width="11" height="13" border="0" alt="Supprimer"></a></td>
+        </tr>
+        <%
+        }
+		%>
+	  </table>
+		</td></tr></table>
+
+<%
+
+
+  }
+%>
+
